@@ -20,7 +20,15 @@
 }
 
 body {
-  background: var(--background);
+  background: rgb(14, 14, 14);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+  color: red;
+}
+
+.common_heading {
+  color: pink;
 }
