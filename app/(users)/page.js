@@ -1,5 +1,7 @@
 const Home = () => {
-  return <h1>Welcome, to thapa technical Next.js Course</h1>;
+  return (
+    <h1 className="font-roboto">Welcome, to thapa technical Next.js Course</h1>
+  );
 };
 
 export default Home;
