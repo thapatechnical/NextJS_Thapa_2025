@@ -2,6 +2,16 @@ import Image from "next/image";
 import style from "./service.module.css";
 import thapa from "@/public/thapa.jpg";
 
+export const metadata = {
+  title: "Service Page",
+  description: "this is my service page",
+  authors: [
+    { name: "vinod thapa" },
+    { name: "thapa technical", url: "thapatechical.com" },
+  ],
+  keywords: ["nextjs", "reactjs", "fullstack"],
+};
+
 const Services = async () => {
   return (
     <section className="font-roboto">
