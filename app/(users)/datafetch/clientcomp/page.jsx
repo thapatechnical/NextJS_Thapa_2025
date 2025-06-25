@@ -1,8 +1,13 @@
-import { User, Users, Star, TrendingUp } from "lucide-react";
+"use client";
 
-const DataFetchServer = async (props) => {
-  const searchParams = await props.searchParams;
-  const userName = searchParams.name;
+import { User, Users, Star, TrendingUp } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const DataFetchClient = () => {
+  const [userInfo, setUserInfo] = useState({});
+  const searchParams = useSearchParams();
+  const userName = searchParams.get("name");
 
   // Handle case where no name is provided
   if (!userName) {
@@ -22,12 +27,20 @@ const DataFetchServer = async (props) => {
     );
   }
 
-  const res = await fetch(`https://api.genderize.io/?name=${userName}`);
-  const userData = await res.json();
-  console.log(userData);
+  useEffect(() => {
+    const revealUserGender = async () => {
+      const res = await fetch(`https://api.genderize.io/?name=${userName}`);
+      const userData = await res.json();
+      console.log(userData);
+      setUserInfo(userData);
+    };
+    revealUserGender();
+  }, []);
 
-  const isMale = userData.gender === "male";
-  const confidencePercentage = userData.probability * 100;
+  if (!userInfo.gender) return null;
+
+  const isMale = userInfo.gender === "male";
+  const confidencePercentage = userInfo.probability * 100;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -58,7 +71,7 @@ const DataFetchServer = async (props) => {
             </div>
 
             <h1 className="text-3xl font-bold text-gray-800 mb-2 capitalize">
-              {userData.name}
+              {userInfo.name}
             </h1>
 
             <div
@@ -73,8 +86,8 @@ const DataFetchServer = async (props) => {
                   isMale ? "bg-blue-500" : "bg-pink-500"
                 }`}
               ></span>
-              {userData.gender.charAt(0).toUpperCase() +
-                userData.gender.slice(1)}
+              {userInfo.gender.charAt(0).toUpperCase() +
+                userInfo.gender.slice(1)}
             </div>
           </div>
 
@@ -111,7 +124,7 @@ const DataFetchServer = async (props) => {
                   Data Sample Size
                 </span>
                 <span className="text-sm font-bold text-gray-800">
-                  {userData.count.toLocaleString()}
+                  {userInfo.count.toLocaleString()}
                 </span>
               </div>
             </div>
@@ -144,4 +157,4 @@ const DataFetchServer = async (props) => {
   );
 };
 
-export default DataFetchServer;
+export default DataFetchClient;
