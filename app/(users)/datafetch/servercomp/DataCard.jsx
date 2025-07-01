@@ -11,7 +11,7 @@ const DataCard = async ({ userName }) => {
   await new Promise((resolve) => {
     setTimeout(() => {
       resolve();
-    }, 3000);
+    }, 500);
   });
 
   return (
@@ -45,7 +45,7 @@ const DataCard = async ({ userName }) => {
             <h1 className="text-3xl font-bold text-gray-800 mb-2 capitalize">
               {userData.name}
             </h1>
-
+            <h1 className="text-red-500"> {Math.random()} </h1>
             <div
               className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${
                 isMale
