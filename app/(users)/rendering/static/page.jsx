@@ -2,7 +2,7 @@ import { db } from "@/config/db.jsx";
 
 const StaticPage = async () => {
   const [doctors] = await db.execute("select * from doctors");
-  console.log(doctors);
+  console.log("Static doctors");
 
   return (
     <>
