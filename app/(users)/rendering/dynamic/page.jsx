@@ -1,11 +1,22 @@
 import { db } from "@/config/db.jsx";
+import { cache } from "react";
 
 export const dynamic = "force-dynamic";
 
 const DynamicPage = async () => {
-  const [doctors] = await db.execute("select * from doctors");
-  console.log("Dynamic doctors");
+  const doctors = await getAllDoctors();
+  return (
+    <>
+      <p>Total Doctors: {doctors.length}</p>
+      <DoctorLists doctors={doctors} />
+    </>
+  );
+};
 
+export default DynamicPage;
+
+const DoctorLists = async () => {
+  const doctors = await getAllDoctors();
   return (
     <>
       <ul>
@@ -17,4 +28,8 @@ const DynamicPage = async () => {
   );
 };
 
-export default DynamicPage;
+const getAllDoctors = cache(async () => {
+  const [doctors] = await db.execute("select * from doctors");
+  console.log("fetching doctors");
+  return doctors;
+});
