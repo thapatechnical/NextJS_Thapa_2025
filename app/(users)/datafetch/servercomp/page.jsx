@@ -24,7 +24,7 @@ const DataFetchServer = async (props) => {
     );
   }
 
-  console.log("Random :", Math.random());
+  //   console.log("Random :", Math.random());
 
   return (
     <div className="grid grid-cols-2 gap-3 h-full ">

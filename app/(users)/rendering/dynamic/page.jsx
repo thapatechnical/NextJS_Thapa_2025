@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 
 const DynamicPage = async () => {
   const doctors = await getAllDoctors();
+
   return (
     <>
       <p>Total Doctors: {doctors.length}</p>
@@ -30,6 +31,6 @@ const DoctorLists = async () => {
 
 const getAllDoctors = cache(async () => {
   const [doctors] = await db.execute("select * from doctors");
-  console.log("fetching doctors");
+  //   console.log("fetching doctors");
   return doctors;
 });

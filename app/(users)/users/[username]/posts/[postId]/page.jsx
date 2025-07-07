@@ -4,7 +4,7 @@ import { use } from "react";
 
 const SingleProfilePost = (props) => {
   const user = use(props.params);
-  console.log(user);
+  //   console.log(user);
 
   return (
     <h1>

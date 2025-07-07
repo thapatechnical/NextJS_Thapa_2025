@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navigation() {
   return (
-    <header className="grid grid-cols-2 font-work">
+    <header className="grid grid-cols-2 font-work leading-[5]">
       <div className="">thapa Logo</div>
       <nav>
         <ul className="flex gap-4">

@@ -3,7 +3,7 @@ import { User, Users, Star, TrendingUp } from "lucide-react";
 const DataCard = async ({ userName }) => {
   const res = await fetch(`https://api.genderize.io/?name=${userName}`);
   const userData = await res.json();
-  console.log(userData);
+  //   console.log(userData);
 
   const isMale = userData.gender === "male";
   const confidencePercentage = userData.probability * 100;

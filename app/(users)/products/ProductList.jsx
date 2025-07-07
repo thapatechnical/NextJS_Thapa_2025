@@ -7,9 +7,9 @@ const ProductList = () => {
   const category = searchParams.get("category");
   // const entries = Object.fromEntries(searchParams.entries());
 
-  console.log("page: ", pages);
-  console.log("category: ", category);
-  console.log("entries: ", entries);
+  //   console.log("page: ", pages);
+  //   console.log("category: ", category);
+  //   console.log("entries: ", entries);
 
   return (
     <>

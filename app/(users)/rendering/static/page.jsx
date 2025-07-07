@@ -4,7 +4,7 @@ export const revalidate = 30;
 
 const StaticPage = async () => {
   const [doctors] = await db.execute("select * from doctors");
-  console.log("Static doctors");
+  //   console.log("Static doctors");
 
   return (
     <>

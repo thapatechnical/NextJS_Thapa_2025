@@ -10,7 +10,7 @@ export const db = mysql.createPool({
 
 try {
   const connection = await db.getConnection();
-  console.log("✅ Database connected successfully.");
+  //   console.log("✅ Database connected successfully.");
   connection.release(); // important to release back to pool
 } catch (err) {
   console.error("❌ Database connection failed:", err);

@@ -31,7 +31,7 @@ const DataFetchClient = () => {
     const revealUserGender = async () => {
       const res = await fetch(`https://api.genderize.io/?name=${userName}`);
       const userData = await res.json();
-      console.log(userData);
+      //   console.log(userData);
       setUserInfo(userData);
     };
     revealUserGender();
@@ -42,7 +42,7 @@ const DataFetchClient = () => {
   const isMale = userInfo.gender === "male";
   const confidencePercentage = userInfo.probability * 100;
 
-  console.log("Random :", Math.random());
+  //   console.log("Random :", Math.random());
 
   return (
     <>

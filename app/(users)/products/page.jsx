@@ -2,7 +2,7 @@ import ProductList from "./ProductList";
 
 const Products = async ({ searchParams }) => {
   const searchParam = await searchParams;
-  console.log("outer ", searchParam);
+  //   console.log("outer ", searchParam);
 
   // const category = searchParam?.category || "all";
   // const sort = searchParam?.sort || "default";
