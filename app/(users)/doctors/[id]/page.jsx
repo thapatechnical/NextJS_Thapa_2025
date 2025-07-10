@@ -1,7 +1,19 @@
-import React from "react";
 import { db } from "@/config/db";
 import { Mail, Phone, MapPin, Calendar, Award, User } from "lucide-react";
 import { notFound } from "next/navigation";
+
+// Return a list of `params` to populate the [slug] dynamic segment
+
+export async function generateStaticParams() {
+  const [doctors] = await db.execute(`select doctor_id from doctors`);
+  return doctors.map((doctor) => ({ id: doctor.doctor_id.toString() }));
+}
+
+// [
+//   { id: "1" },
+//   { id: "2" },
+//   { id: "3" }
+// ]
 
 const SingleDoctor = async (props) => {
   const params = await props.params;
