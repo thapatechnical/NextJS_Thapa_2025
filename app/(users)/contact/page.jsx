@@ -1,16 +1,23 @@
-import { contactAction } from "./contact.action";
+"use client";
 
-export const metadata = {
-  title: "Contact Page",
-  description: "this is my Contact page",
-  authors: [
-    { name: "vinod thapa" },
-    { name: "thapa technical", url: "thapatechical.com" },
-  ],
-  keywords: ["nextjs", "react_js", "fullstack"],
+// import { contactAction } from "./contact.action";
+
+// export const metadata = {
+//   title: "Contact Page",
+//   description: "this is my Contact page",
+//   authors: [
+//     { name: "vinod thapa" },
+//     { name: "thapa technical", url: "thapatechical.com" },
+//   ],
+//   keywords: ["nextjs", "react_js", "fullstack"],
+// };
+
+const contactAction = (formData) => {
+  const { fullName, email, message } = Object.fromEntries(formData.entries());
+  console.log(fullName, email, message);
 };
 
-const Contact = async () => {
+const Contact = () => {
   return (
     <>
       <div className="min-h-screen bg-[rgb(14,14,14)] text-white">
@@ -77,11 +84,12 @@ const Contact = async () => {
                 </div>
 
                 {/* Submit Button */}
+
                 <button
                   type="submit"
                   className="w-full bg-pink-600 hover:bg-pink-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
                 >
-                  <span>Send Message</span>
+                  <span> Send Message</span>
                 </button>
               </form>
             </div>
