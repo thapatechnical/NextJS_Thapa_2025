@@ -1,23 +1,25 @@
 "use client";
 
+import { useActionState, useState, useTransition } from "react";
+import { contactAction } from "./contact.action";
+import { useFormStatus } from "react-dom";
+import { Loader } from "lucide-react";
+
 // import { contactAction } from "./contact.action";
 
-// export const metadata = {
-//   title: "Contact Page",
-//   description: "this is my Contact page",
-//   authors: [
-//     { name: "vinod thapa" },
-//     { name: "thapa technical", url: "thapatechical.com" },
-//   ],
-//   keywords: ["nextjs", "react_js", "fullstack"],
-// };
-
-const contactAction = (formData) => {
-  const { fullName, email, message } = Object.fromEntries(formData.entries());
-  console.log(fullName, email, message);
-};
-
 const Contact = () => {
+  // const [state, formAction, isPending] = useActionState(contactAction, null);
+  const [isPending, startTransition] = useTransition();
+  const [contactFormResponse, setContactFormResponse] = useState(null);
+
+  const handleContactSubmit = (formData) => {
+    const { fullName, email, message } = Object.fromEntries(formData);
+    startTransition(async () => {
+      const res = await contactAction(fullName, email, message);
+      setContactFormResponse(res);
+    });
+  };
+
   return (
     <>
       <div className="min-h-screen bg-[rgb(14,14,14)] text-white">
@@ -28,8 +30,9 @@ const Contact = () => {
             </h1>
 
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-8 border border-gray-800">
-              <form className="space-y-6" action={contactAction}>
+              <form className="space-y-6" action={handleContactSubmit}>
                 {/* Full Name Field */}
+
                 <div>
                   <label
                     htmlFor="fullName"
@@ -84,15 +87,21 @@ const Contact = () => {
                 </div>
 
                 {/* Submit Button */}
-
-                <button
-                  type="submit"
-                  className="w-full bg-pink-600 hover:bg-pink-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
-                >
-                  <span> Send Message</span>
-                </button>
+                <Submit />
               </form>
             </div>
+
+            <section>
+              {contactFormResponse && (
+                <p
+                  className={` p-4 mt-5 text-center capitalize ${
+                    contactFormResponse.success ? "bg-green-500" : "bg-red-500"
+                  }`}
+                >
+                  {contactFormResponse.message}
+                </p>
+              )}
+            </section>
           </div>
         </div>
       </div>
@@ -101,3 +110,22 @@ const Contact = () => {
 };
 
 export default Contact;
+
+const Submit = () => {
+  const { pending, data, method, action } = useFormStatus();
+  return (
+    <>
+      <button
+        type="submit"
+        disabled={pending}
+        className="w-full bg-pink-600 hover:bg-pink-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+      >
+        {pending ? (
+          <Loader className="animate-spin" />
+        ) : (
+          <span> Send Message</span>
+        )}
+      </button>
+    </>
+  );
+};

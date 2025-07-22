@@ -12,11 +12,14 @@ export default function Navigation() {
           <li>
             <Link href="/about">About</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/clientcomp">ClientComp</Link>
           </li>
           <li>
             <Link href="/servercomp">ServerComp</Link>
+          </li> */}
+          <li>
+            <Link href="/signup"> SignUp </Link>
           </li>
           <li>
             <Link href="/service">Service</Link>
