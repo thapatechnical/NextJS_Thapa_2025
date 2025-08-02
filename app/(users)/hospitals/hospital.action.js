@@ -3,10 +3,10 @@
 import { db } from "@/config/db";
 import { revalidatePath } from "next/cache";
 
-export const createHospitalAction = async (formData) => {
+export const createHospitalAction = async (data) => {
   try {
     // Assuming formData is of type FormData
-    const data = Object.fromEntries(formData);
+    // const data = Object.fromEntries(formData);
     const { name, city, state, department, established_year } = data;
 
     await db.execute(
@@ -16,7 +16,7 @@ export const createHospitalAction = async (formData) => {
 
     revalidatePath("/hospitals");
 
-    // return { success: true, message: "Hospital data submitted successfully" };
+    return { success: true, message: "Hospital data submitted successfully" };
   } catch (error) {
     if (error.message === "NEXT_REDIRECT") throw error;
     console.log(error);
