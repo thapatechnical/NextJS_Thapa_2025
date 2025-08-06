@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "gsap": "^3.13.0",
     "lucide-react": "^0.522.0",
     "motion": "^12.23.12",
     "mysql2": "^3.14.1",
